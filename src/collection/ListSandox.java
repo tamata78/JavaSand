@@ -1,4 +1,4 @@
-package jp.grv.sandbox.batch;
+package collection;
 
 import java.util.ArrayList;
 import java.util.Arrays;

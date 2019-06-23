@@ -1,4 +1,4 @@
-package jp.grv.sandbox.batch;
+package collection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import collection.bean.Person;
 
 public class StreamSandbox {
 

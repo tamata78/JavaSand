@@ -1,4 +1,4 @@
-package jp.grv.sandbox.batch;
+package file;
 
 import java.io.File;
 import java.io.IOException;

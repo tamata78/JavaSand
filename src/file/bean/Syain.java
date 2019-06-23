@@ -1,4 +1,4 @@
-package file;
+package file.bean;
 
 import java.util.List;
 

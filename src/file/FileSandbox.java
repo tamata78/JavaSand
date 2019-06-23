@@ -1,4 +1,4 @@
-package jp.grv.sandbox.batch;
+package file;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;

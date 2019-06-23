@@ -1,4 +1,4 @@
-package jp.grv.sandbox.batch;
+package batch;
 
 public class BatchSandbox {
 

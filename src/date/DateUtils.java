@@ -1,4 +1,4 @@
-package jp.grv.sandbox.batch;
+package date;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
