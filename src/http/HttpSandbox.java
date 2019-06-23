@@ -9,8 +9,14 @@ public class HttpSandbox {
 	public static void main(String[] args) {
 		// 外部API Get
 		try {
-			HttpURLConnection conn = HttpUtils.apiGet("http://www.XXXXXXXXX.xxx/servPersonalInfo",
-					"request1=aaa&request2=bbb");
+			HttpURLConnection conn = HttpUtils.createConnect("http://www.XXXXXXXXX.xxx/servPersonalInfo", "GET");
+			HttpUtils.execApi(conn, "request1=aaa&request2=bbb");
+
+			System.out.println("ヘッダー要素[" + conn.getHeaderFields() + "]");
+			System.out.println("レスポンスメッセージ[" + conn.getResponseMessage() + "]");
+			if (HttpURLConnection.HTTP_OK != conn.getResponseCode()) {
+				// error log
+			}
 
 			// レスポンスがXMLの場合
 			Document doc = HttpUtils.getApiResXml(conn);
@@ -19,7 +25,6 @@ public class HttpSandbox {
 				System.out.println(nodes.item(i).getTextContent());
 			}
 		} catch (Exception e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 
