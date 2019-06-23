@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import file.bean.Syain;
 
-public class JsonUtil {
+public class JsonSandbox {
 
 	public static void main(String[] args) {
 		// JSONからJavaオブジェクトに変換

@@ -9,8 +9,8 @@ public class HttpSandbox {
 	public static void main(String[] args) {
 		// 外部API Get
 		try {
-			HttpURLConnection conn = HttpUtils.createConnect("http://www.XXXXXXXXX.xxx/servPersonalInfo", "GET");
-			HttpUtils.execApi(conn, "request1=aaa&request2=bbb");
+			HttpURLConnection conn = HttpUtils.connectGet("http://www.XXXXXXXXX.xxx/servPersonalInfo", "text/plain");
+			HttpUtils.execApiGet(conn);
 
 			System.out.println("ヘッダー要素[" + conn.getHeaderFields() + "]");
 			System.out.println("レスポンスメッセージ[" + conn.getResponseMessage() + "]");
@@ -24,6 +24,27 @@ public class HttpSandbox {
 			for (int i = 0; i < nodes.getLength(); i++) {
 				System.out.println(nodes.item(i).getTextContent());
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// 外部API Post
+		try {
+			HttpURLConnection conn = HttpUtils.connectPost("http://www.XXXXXXXXX.xxx/servPersonalInfo",
+					"application/json; charset=UTF-8");
+			String json = "";
+			HttpUtils.execApiPost(conn, json);
+
+			System.out.println("ヘッダー要素[" + conn.getHeaderFields() + "]");
+			System.out.println("レスポンスメッセージ[" + conn.getResponseMessage() + "]");
+			if (HttpURLConnection.HTTP_OK != conn.getResponseCode()) {
+				// error log
+			}
+
+			// レスポンスがJsonの場合
+			String resJson = HttpUtils.getApiResJson(conn);
+			System.out.println("レスポンスJson[" + resJson + "]");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
