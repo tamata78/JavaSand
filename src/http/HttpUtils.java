@@ -11,13 +11,19 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Locale;
 
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Form;
+import javax.ws.rs.core.MediaType;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 
 public class HttpUtils {
-
 	public static HttpURLConnection connectGet(String strUrl, String contentType) throws Exception {
 		// 実行APIのURL設定
 		URL url = new URL(strUrl);
@@ -166,4 +172,33 @@ public class HttpUtils {
 
 		return builder.toString();
 	}
+
+	private static Client client = ClientBuilder.newClient();
+
+	public static String jerseyGet() {
+		WebTarget target = client.target("https://api.example.com").path("/oauth/access_token").queryParam("token",
+				"shortAccessToken");
+
+		try {
+			String result = target.request().get(String.class);
+			return result;
+		} catch (BadRequestException e) {
+			System.out.println("response=" + e.getResponse().readEntity(String.class));
+			throw e;
+		}
+	}
+
+	public static String jerseyPost() {
+		Entity<Form> entity = Entity.entity(new Form().param("name", "Taro").param("subtype", "CUSTOM"),
+				MediaType.APPLICATION_FORM_URLENCODED_TYPE);
+		try {
+			String result = client.target("https://api.example.com").path("/path_to_post_method").request().post(entity,
+					String.class);
+			return result;
+		} catch (BadRequestException e) {
+			System.out.println("response=" + e.getResponse().readEntity(String.class));
+			throw e;
+		}
+	}
+
 }
