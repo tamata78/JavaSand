@@ -59,9 +59,11 @@ public class HttpUtils {
 		conn.setRequestProperty("User-Agent", "Android");
 		// Accept-Language
 		conn.setRequestProperty("Accept-Language", Locale.getDefault().toString());
+
 		// Content-Type
 		conn.addRequestProperty("Content-Type", "application/json; charset=UTF-8");
-		conn.setRequestProperty("Content-type", "text/xml");
+		// conn.setRequestProperty("Content-type", "text/xml");
+
 		// 受信可能なデータのメディアタイプ
 		conn.setRequestProperty("accept", "text/xml");
 		// レスポンスのボディ受信を許可する
@@ -173,13 +175,16 @@ public class HttpUtils {
 		return builder.toString();
 	}
 
+	// javax.ws.rsのClientクラスでのhttp通信
 	private static Client client = ClientBuilder.newClient();
 
 	public static String jerseyGet() {
+		// ドメイン、パスディレクトリ、クエリパラメータ付与を行い、アクセス対象を生成
 		WebTarget target = client.target("https://api.example.com").path("/oauth/access_token").queryParam("token",
 				"shortAccessToken");
 
 		try {
+			// リクエスト発行、戻り値の型を指定。
 			String result = target.request().get(String.class);
 			return result;
 		} catch (BadRequestException e) {
@@ -188,6 +193,7 @@ public class HttpUtils {
 		}
 	}
 
+	// jerseyを使ったPOST通信
 	public static String jerseyPost() {
 		Entity<Form> entity = Entity.entity(new Form().param("name", "Taro").param("subtype", "CUSTOM"),
 				MediaType.APPLICATION_FORM_URLENCODED_TYPE);
