@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 public class MessageSandbox {
 
 	public static void main(String[] args) {
-		// データをJSON化してレスポンスを呼び出し元に返却
+		// レスポンスに設定してメッセージ送付
 		PrintWriter out = null;
 		try {
 			String contents = "";
@@ -22,12 +22,12 @@ public class MessageSandbox {
 
 		// 例外発生させてメッセージ送付
 		//throw new ProccessException(ResUtil.getProccessStr(
-		//	"errors.group.code", optionGroupCd));
+		//	"errors.group.code", code));
 
 		// org.seasar.struts.util.ActionMessagesUtil.addErrorsを用いてメッセージ送付
-		// addError(new ActionMessage("errors.order_register"));
+		// ActionMessage actionMessage = addError(new ActionMessage("errors.order_register"));
 		// ActionErrors errors = new ActionErrors();
-		// errors.add(EMPTY_STR, am);
+		// errors.add("", actionMessage);
 		// ActionMessagesUtil.addErrors(request, errors);
 
 	}
