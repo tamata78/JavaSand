@@ -65,5 +65,9 @@ public class JsonSandbox {
 //			e.printStackTrace();
 //		}
 
+		String testJson3 = JsonicUtil.serialize(syain2);
+		System.out.println(testJson3);
+		Syain syain3 = JsonicUtil.deserialize(testJson3, Syain.class);
+
 	}
 }
