@@ -23,5 +23,9 @@ public class DateSandox {
 
 		LocalDate dateParse = LocalDate.parse("2013/07/07", DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 		System.out.println("dateParse:" + dateParse); // dateParse; 2013-07-07
+
+		/** Timestamp **/
+		// 現在日時のミリ秒表示
+        System.out.println(DateUtils.currentDateTimeMillis());
 	}
 }

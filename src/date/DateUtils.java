@@ -59,7 +59,7 @@ public class DateUtils {
 
 	/**
 	 * LocalDateから文字列に変更する
-	 * 
+	 *
 	 * @param ldate
 	 * @return
 	 */
@@ -69,7 +69,7 @@ public class DateUtils {
 
 	/**
 	 * LocalDateから文字列に変更する(フォーマット指定)
-	 * 
+	 *
 	 * @param ldate
 	 * @param pattern
 	 * @return
@@ -84,7 +84,7 @@ public class DateUtils {
 
 	/**
 	 * LocalDateTimeから文字列に変更する(フォーマット指定)
-	 * 
+	 *
 	 * @param ldate
 	 * @param pattern
 	 * @return
@@ -280,7 +280,7 @@ public class DateUtils {
 
 	/**
 	 * util.Dateをsql.Dateに変換する
-	 * 
+	 *
 	 * @param date
 	 * @return
 	 */
@@ -311,6 +311,15 @@ public class DateUtils {
 			return null;
 		}
 		return targetDate.plus(Period.ofDays(1));
+	}
+
+	/**
+	 * 現在日時をミリ秒表示する
+	 *
+	 * @return
+	 */
+	public static Timestamp currentDateTimeMillis() {
+		return new Timestamp(System.currentTimeMillis());
 	}
 
 }
