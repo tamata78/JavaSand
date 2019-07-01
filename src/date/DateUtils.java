@@ -38,7 +38,7 @@ public class DateUtils {
 
 	/**
 	 * 日付を文字列にする(フォーマット指定)
-	 *
+	 * 
 	 * @param date
 	 * @return
 	 */
