@@ -39,6 +39,13 @@ public class ListSandox {
 			sj.add(String.valueOf(joinIntegerId));
 		}
 
-		String mes = new StringBuilder("creativeIds =").append(sj.toString()).toString();
+		String mes = new StringBuilder("creativeIds = ").append(sj.toString()).toString();
+		System.out.println(mes);
+
+		// List → Array
+		List<String> shopIdList = new ArrayList<String>(Arrays.asList("A", "B", "C"));
+		String[] shopIdArray = shopIdList.toArray(new String[shopIdList.size()]);
+		System.out.println(Arrays.toString(shopIdArray));
+
 	}
 }
