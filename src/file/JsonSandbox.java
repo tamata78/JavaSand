@@ -9,19 +9,21 @@ import java.util.Map;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.ObjectReader;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
 import file.bean.Syain;
 
 public class JsonSandbox {
 
 	public static void main(String[] args) {
+		ObjectMapper mapper = JsonUtil.mapper;
+
 		// JSONからJavaオブジェクトに変換
 		String testJson1 = "{\"id\":1, \"name\":\"taro\",\"sikaku\":[\"基本\",\"応用\"]}";
-		Syain syain1 = new Syain();
-		ObjectMapper mapper = new ObjectMapper();
 		try {
-			syain1 = mapper.readValue(testJson1, Syain.class);
+			ObjectReader reader = mapper.readerFor(Syain.class);
+			Syain syain1 = reader.readValue(testJson1);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -43,10 +45,10 @@ public class JsonSandbox {
 		Map<String, Syain> map = new HashMap<String, Syain>();
 		map.put("paramStr", syain2);
 
-		ObjectMapper mapper2 = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT); // 見やすく整形
+		ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
 
 		try {
-			String testJson2 = mapper2.writeValueAsString(map);
+			String testJson2 = writer.writeValueAsString(map);
 			System.out.println(testJson2);
 
 		} catch (JsonProcessingException e) {
@@ -55,7 +57,7 @@ public class JsonSandbox {
 
 		// JSONのキー項目を指定して値を取得
 		try {
-			JsonNode node1 = mapper2.readTree(testJson1);
+			JsonNode node1 = mapper.readTree(testJson1);
 			int id = node1.get("id").asInt();
 			String name = node1.get("name").asText();
 			String sikaku1 = node1.get("sikaku").get(0).asText();
