@@ -26,6 +26,7 @@ public class DateSandox {
 
 		/** Timestamp **/
 		// 現在日時のミリ秒表示
-        System.out.println(DateUtils.currentDateTimeMillis());
+		System.out.println(DateUtils.currentDateTimeMillis());
+
 	}
 }
