@@ -59,7 +59,8 @@ public class HttpUtils {
 		conn.setRequestProperty("User-Agent", "Android");
 		// Accept-Language
 		conn.setRequestProperty("Accept-Language", Locale.getDefault().toString());
-
+		// charset
+		conn.setRequestProperty("charset", "UTF-8");
 		// Content-Type
 		conn.addRequestProperty("Content-Type", "application/json; charset=UTF-8");
 		// conn.setRequestProperty("Content-type", "text/xml");
