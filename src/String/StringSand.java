@@ -15,5 +15,12 @@ public class StringSand {
 		// 文字列結合。コンストラクタへのint挿入は、キャパシティー設定になるため、文字列変換を行う
 		String shopId = new StringBuilder(String.valueOf(1)).append("123").toString();
 		System.out.println(shopId);
+
+		// 先頭、末尾の改行や制御文字全般、スペースを除去する
+		String trimTargetStr = "\taaa \n";
+		String afStr = trimTargetStr.trim();
+		System.out.println("「" +  trimTargetStr + "」");
+		System.out.println("「" +  afStr + "」");
+
 	}
 }
