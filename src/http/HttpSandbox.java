@@ -6,7 +6,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
 public class HttpSandbox {
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 		// 外部API Get
 		try {
 			HttpURLConnection conn = HttpUtils.connectGet("http://www.XXXXXXXXX.xxx/servPersonalInfo", "text/plain");
@@ -48,6 +48,14 @@ public class HttpSandbox {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		// Cookie
+		Cookie cookie = new Cookie("userId", 111);
+		cookie.setPath("http://example.com");
+
+		// レスポンスにcookieを追加
+		HttpServletResponse res = new HttpServletResponse;
+		response.addCookie(cookie);
 
 	}
 }
