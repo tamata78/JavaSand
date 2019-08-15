@@ -2,10 +2,15 @@ package http;
 
 import java.net.HttpURLConnection;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
 public class HttpSandbox {
+	public static HttpServletResponse res;
+
     public static void main(String[] args) {
 		// 外部API Get
 		try {
@@ -50,12 +55,11 @@ public class HttpSandbox {
 		}
 
 		// Cookie
-		Cookie cookie = new Cookie("userId", 111);
+		Cookie cookie = new Cookie("userId", "111");
 		cookie.setPath("http://example.com");
 
 		// レスポンスにcookieを追加
-		HttpServletResponse res = new HttpServletResponse;
-		response.addCookie(cookie);
+		res.addCookie(cookie);
 
 	}
 }
