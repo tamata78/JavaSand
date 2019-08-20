@@ -1,5 +1,7 @@
 package String;
 
+import java.util.List;
+
 import resource.ResourceUtils;
 
 public class StringUtils {
@@ -29,9 +31,23 @@ public class StringUtils {
 //
 //        }
 
-
         return true;
 
     }
 
+
+    /**
+     * 禁則文字チェック
+     *
+     * @param menuList 商品リスト
+     * @return checkResponse
+     */
+    public String checkProhibitedChar(List<String> menuList) {
+        for (String string : menuList) {
+
+        }
+
+
+        return null;
+    }
 }
