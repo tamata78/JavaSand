@@ -17,17 +17,6 @@ import file.bean.Syain;
 public class JsonSandbox {
 
 	public static void main(String[] args) {
-		ObjectMapper mapper = JsonUtil.mapper;
-
-		// JSONからJavaオブジェクトに変換
-		String testJson1 = "{\"id\":1, \"name\":\"taro\",\"sikaku\":[\"基本\",\"応用\"]}";
-		try {
-			ObjectReader reader = mapper.readerFor(Syain.class);
-			Syain syain1 = reader.readValue(testJson1);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 		// JavaオブジェクトからJSONに変換
 		List<String> sikaku = Arrays.asList("基本", "応用");
 		Syain syain2 = new Syain();
@@ -45,7 +34,29 @@ public class JsonSandbox {
 		Map<String, Syain> map = new HashMap<String, Syain>();
 		map.put("paramStr", syain2);
 
-		ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
+        JacksonSand(map);
+
+		// Jsonicを用いて指定OBJへデコード
+		String testJson3 = JsonicUtil.serialize(syain2);
+		System.out.println(testJson3);
+		Syain syain3 = JsonicUtil.deserialize(testJson3, Syain.class);
+
+	}
+
+    private static void JacksonSand(Map<String, Syain> map) {
+        ObjectMapper mapper = JsonUtil.mapper;
+
+        // JSONからJavaオブジェクトに変換
+        String testJson1 = "{\"id\":1, \"name\":\"taro\",\"sikaku\":[\"基本\",\"応用\"]}";
+        try {
+            ObjectReader reader = mapper.readerFor(Syain.class);
+            Syain syain1 = reader.readValue(testJson1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
 
 		try {
 			String testJson2 = writer.writeValueAsString(map);
@@ -67,10 +78,9 @@ public class JsonSandbox {
 			e.printStackTrace();
 		}
 
-		// Jsonicを用いて指定OBJへデコード
-		String testJson3 = JsonicUtil.serialize(syain2);
-		System.out.println(testJson3);
-		Syain syain3 = JsonicUtil.deserialize(testJson3, Syain.class);
+		// Jsonノード作成
+		// Jacksonで直接JSONを組み立てる方法
 
-	}
+
+    }
 }
