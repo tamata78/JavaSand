@@ -1,3 +1,4 @@
+package binary;
 import java.io.UnsupportedEncodingException;
 
 public class ByteSand {

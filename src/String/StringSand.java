@@ -1,5 +1,7 @@
 package String;
 
+import java.util.regex.Pattern;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class StringSand {
@@ -24,6 +26,13 @@ public class StringSand {
 		String afStr = trimTargetStr.trim();
 		System.out.println("「" +  trimTargetStr + "」");
 		System.out.println("「" +  afStr + "」");
+
+		// 正規表現を使ったマッチング
+		String targetStr = "abbbc";
+        Pattern prohibitedPattern = Pattern.compile("bbb");
+        if (prohibitedPattern.matcher(targetStr).find()) {
+            System.out.println("match bbb!");
+        }
 
 	}
 }
