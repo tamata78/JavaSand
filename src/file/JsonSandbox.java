@@ -1,6 +1,7 @@
 package file;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -46,7 +47,7 @@ public class JsonSandbox {
     private static void JacksonSand(Map<String, Syain> map) {
         ObjectMapper mapper = JsonUtil.mapper;
 
-        // JSONからJavaオブジェクトに変換
+        /** JSONからJavaオブジェクトに変換 */
         String testJson1 = "{\"id\":1, \"name\":\"taro\",\"sikaku\":[\"基本\",\"応用\"]}";
         try {
             ObjectReader reader = mapper.readerFor(Syain.class);
@@ -55,18 +56,32 @@ public class JsonSandbox {
             e.printStackTrace();
         }
 
-
+        /** mapをJSONに設定 */
         ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
+        try {
+            String testJson2 = writer.writeValueAsString(map);
+            System.out.println(testJson2);
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        /** ListをJSONに設定 */
+        List<String> list = new ArrayList<String>();
+        list.add("aaa");
+        list.add("bbb");
+        HashMap<String, List<String>> resMap = new HashMap<String, List<String>>();
+        resMap.put("mes", list);
 
 		try {
-			String testJson2 = writer.writeValueAsString(map);
+			String testJson2 = writer.writeValueAsString(resMap);
 			System.out.println(testJson2);
 
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
 
-		// JSONのキー項目を指定して値を取得
+		/** JSONのキー項目を指定して値を取得 */
 		try {
 			JsonNode node1 = mapper.readTree(testJson1);
 			int id = node1.get("id").asInt();
