@@ -1,4 +1,4 @@
-package binary;
+package primitive.binary;
 
 import java.io.UnsupportedEncodingException;
 
@@ -22,16 +22,22 @@ public class ByteSand {
     // 機種文字各種
     public static final String MACHINE_DEPEND_CHAR_VARIOUS = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ㍉㌔㌢㍍㌘㌧㌃㌶㍑㍗㌍㌦㌣㌫㍊㌻㎜㎝㎞㎎㎏㏄㎡㍻〝〟№㏍℡㊤㊥㊦㊧㊨㈱㈲㈹㍾㍽㍼∮∑∟⊿ⅰⅱⅲⅳⅴⅵⅶⅷⅸⅹ￤＇＂纊褜鍈銈蓜俉炻昱棈鋹曻彅丨仡仼伀伃伹佖侒侊侚侔俍偀倢俿倞偆偰偂傔僴僘兊兤冝冾凬刕劜劦勀勛匀匇匤卲厓厲叝﨎咜咊咩哿喆坙坥垬埈埇﨏塚增墲夋奓奛奝奣妤妺孖寀甯寘寬尞岦岺峵崧嵓﨑嵂嵭嶸嶹巐弡弴彧德忞恝悅悊惞惕愠惲愑愷愰憘戓抦揵摠撝擎敎昀昕昻昉昮昞昤晥晗晙晴晳暙暠暲暿曺朎朗杦枻桒柀栁桄棏﨓楨﨔榘槢樰橫橆橳橾櫢櫤毖氿汜沆汯泚洄涇浯涖涬淏淸淲淼渹湜渧渼溿澈澵濵瀅瀇瀨炅炫焏焄煜煆煇凞燁燾犱犾猤猪獷玽珉珖珣珒琇珵琦琪琩琮瑢璉璟甁畯皂皜皞皛皦益睆劯砡硎硤硺礰礼神祥禔福禛竑竧靖竫箞精絈絜綷綠緖繒罇羡羽茁荢荿菇菶葈蒴蕓蕙蕫﨟薰蘒﨡蠇裵訒訷詹誧誾諟諸諶譓譿賰賴贒赶﨣軏﨤逸遧郞都鄕鄧釚釗釞釭釮釤釥鈆鈐鈊鈺鉀鈼鉎鉙鉑鈹鉧銧鉷鉸鋧鋗鋙鋐﨧鋕鋠鋓錥錡鋻﨨錞鋿錝錂鍰鍗鎤鏆鏞鏸鐱鑅鑈閒隆﨩隝隯霳霻靃靍靏靑靕顗顥飯飼餧館馞驎髙髜魵魲鮏鮱鮻鰀鵰鵫鶴鸙黑";
 
-    public static void main(String[] args) {
-        /* String→Byte配列→16進表記 */
-        String strChar = "①";
-        byte[] checkByte = new byte[10];
-        try {
-            checkByte = strChar.getBytes("Windows-31j");
-        } catch (UnsupportedEncodingException e) {
-        }
-        String hexStr = new StringBuilder(String.format("%02X", checkByte[0])).append(String.format("%02X", checkByte[1])).append(":").append(strChar).toString();
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        // String → 文字コード(Shift-JIS)で変換 → byte配列
+        byte[] checkByte = "①".getBytes("Windows-31j");
+
+        // byte配列 → 16進2桁表示
+        String hexStr = String.format("%02X", checkByte[0]);
         System.out.println(hexStr);
+
+        // byte型数値を符号なしで扱う
+        byte byteVal = (byte) 0xFF; // 11111111
+        int intVal = byteVal; // 符号あり -127〜128の範囲の数値を表せる
+        System.out.printf("int型 intVal (16進数表示):%x%n", intVal);
+        System.out.printf("int型 intVal (10進数表示):%d%n", intVal);
+        int unsignedIntVal = byteVal & 0xFF; // 符号なしに変換 0〜255の範囲の数値を表せる。最上位ビットが符号
+        System.out.printf("int型 intVal (16進数表示):%x%n", unsignedIntVal);
+        System.out.printf("int型 intVal (10進数表示):%d%n", unsignedIntVal);
 
         // 禁則文字チェック
 //        System.out.println(checkProhibitedChar(NO_MACHINE_DEPEND_CHAR));
@@ -44,16 +50,7 @@ public class ByteSand {
 
         // コードポイント
         System.out.println("===コードポイント===");
-        System.out.println(Integer.toHexString("test".codePointAt(0)));
-
-//        System.out.println(checkProhibitedSurrogateChar(NO_MACHINE_DEPEND_CHAR));
-//        System.out.println(checkProhibitedSurrogateChar("aa①aa"));
-//        System.out.println(checkProhibitedSurrogateChar("あい侊うえお"));
-//        System.out.println(checkProhibitedSurrogateChar("あい彅うえお"));
         System.out.println(checkProhibitedSurrogateChar("あい𠮷うえお"));
-//        System.out.println(checkProhibitedSurrogateChar("あい㍉うえお"));
-//        System.out.println(checkProhibitedSurrogateChar("あいうえお"));
-
 //        System.out.println(checkProhibitedSurrogateChar(MACHINE_DEPEND_CHAR_VARIOUS));
 
     }
@@ -76,7 +73,7 @@ public class ByteSand {
             try {
                 checkByte = strChar.getBytes("Windows-31j");
 //                checkByte = strChar.getBytes("UTF-8");
-                //                System.out.println(targetStr.charAt(i));
+                // System.out.println(targetStr.charAt(i));
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -88,13 +85,13 @@ public class ByteSand {
 //            }
 
             if (checkByte.length > 1) {
-                System.out.println(String.format("%02X", checkByte[0]) + String.format("%02X", checkByte[1]) + ":" + strChar);
+                System.out.println(
+                        String.format("%02X", checkByte[0]) + String.format("%02X", checkByte[1]) + ":" + strChar);
             } else {
                 System.out.println(String.format("%02X", checkByte[0]) + ":" + strChar);
             }
 
 //          System.out.println(String.format("%02X", checkByte[0]) + String.format("%02X", checkByte[1]) + String.format("%02X", checkByte[2]) + ":" + strChar);
-
 
         }
 
@@ -170,8 +167,7 @@ public class ByteSand {
     }
 
     /**
-     * 禁則文字チェックします
-     * (サロゲートペア文字考慮なし)
+     * 禁則文字チェックします (サロゲートペア文字考慮なし)
      *
      * @param チェック対象文字列
      * @return true 禁則文字あり false 禁則文字なし
@@ -193,7 +189,8 @@ public class ByteSand {
             // 対象文字列
             String strChar = str.substring(i, i + 1);
             if (checkByte.length > 1) {
-                System.out.println(String.format("%02X", checkByte[0]) + String.format("%02X", checkByte[1]) + ":" + strChar);
+                System.out.println(
+                        String.format("%02X", checkByte[0]) + String.format("%02X", checkByte[1]) + ":" + strChar);
             } else {
                 System.out.println(String.format("%02X", checkByte[0]) + ":" + strChar);
             }
@@ -239,8 +236,7 @@ public class ByteSand {
     }
 
     /**
-     * 禁則文字チェックします
-     * (サロゲートペア文字考慮あり)
+     * 禁則文字チェックします (サロゲートペア文字考慮あり)
      *
      * @param チェック対象文字列
      * @return true 禁則文字あり false 禁則文字なし
@@ -253,7 +249,7 @@ public class ByteSand {
         // 1文字ずつチェックしていく
         for (int i = 0, j = 0, codePoint; i < str.length(); i += Character.charCount(codePoint)) {
             codePoint = str.codePointAt(i);
-            //codePoints[j++] = codePoint;
+            // codePoints[j++] = codePoint;
 
             // 対象文字列
             int[] tmpStrChar = { codePoint };

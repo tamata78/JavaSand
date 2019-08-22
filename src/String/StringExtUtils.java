@@ -2,7 +2,7 @@ package String;
 
 import java.util.Arrays;
 
-public class StringUtils {
+public class StringExtUtils {
     /**
      * 配列文字列を結合する<br>
      * StreamAPIなし

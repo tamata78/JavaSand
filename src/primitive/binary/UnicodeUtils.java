@@ -1,4 +1,4 @@
-package binary;
+package primitive.binary;
 
 public class UnicodeUtils {
 
