@@ -2,8 +2,6 @@ package primitive.binary;
 
 import java.io.UnsupportedEncodingException;
 
-import resource.ResourceUtils;
-
 public class ByteSand {
 
     /** 機種依存文字 **/
@@ -57,114 +55,6 @@ public class ByteSand {
 
     /** 禁則文字. **/
     private static final String INVALID_CHARACTER = "invalid.character";
-
-    /**
-     * 禁則文字チェック
-     *
-     * @param targetStr
-     * @return 禁則文字あり：false 禁則文字なし:true
-     */
-    private static boolean checkProhibitedChars(String targetStr) {
-        String prohibitedChars = ResourceUtils.getPropertiesVal(INVALID_CHARACTER);
-
-        for (int i = 0; i < targetStr.length(); i++) {
-            byte[] checkByte = new byte[targetStr.length()];
-            String strChar = targetStr.substring(i, i + 1);
-            try {
-                checkByte = strChar.getBytes("Windows-31j");
-//                checkByte = strChar.getBytes("UTF-8");
-                // System.out.println(targetStr.charAt(i));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-
-            // ２バイト文字でない場合はチェックしない
-//            if (checkByte.length != 2) {
-//                System.out.println("2byteじゃない文字" + strChar);
-//                continue;
-//            }
-
-            if (checkByte.length > 1) {
-                System.out.println(
-                        String.format("%02X", checkByte[0]) + String.format("%02X", checkByte[1]) + ":" + strChar);
-            } else {
-                System.out.println(String.format("%02X", checkByte[0]) + ":" + strChar);
-            }
-
-//          System.out.println(String.format("%02X", checkByte[0]) + String.format("%02X", checkByte[1]) + String.format("%02X", checkByte[2]) + ":" + strChar);
-
-        }
-
-        // charAtは、機種依存文字(≒サロゲートペア)を考慮できない
-//        for(int i = 0; i < targetStr.codePointCount(0, targetStr.length()); i++) {
-//            char targetChar = targetStr.charAt(i);
-//
-//            for (int prohibitedIndex = 0; prohibitedIndex < prohibitedChars.length(); prohibitedIndex++) {
-//                if(targetChar.equals(prohibitedChars.charAt(prohibitedIndex))) {
-//
-//                }
-//            }
-//
-//        }
-
-        return true;
-
-    }
-
-    private static boolean isLeadByte(int charByte) {
-        return ((0x81 <= charByte) && (charByte <= 0x9F)) || ((0xE0 <= charByte) && (charByte <= 0xFC));
-    }
-
-    // charByte が SJIS ２バイト文字の第２バイトのときそのときに限り真を返す．
-    private static boolean isTrailByte(int charByte) {
-        // Shift_JIS 漢字 第2バイト : 0x40〜0x7E, 0x80〜0xFC 、制御文字delete(0x7F)
-        return (0x40 <= charByte) && (charByte <= 0xFC) && (charByte != 0x7F);
-    }
-
-    /**
-     * 機種依存文字を含むか
-     *
-     * @param target
-     * @return trueなら機種依存文字を含む
-     * @throws UnsupportedEncodingException
-     */
-    public static boolean hasMachineCharacters(String target) throws UnsupportedEncodingException {
-        byte charArray[] = target.getBytes("MS932");
-        for (int i = 0; i < charArray.length; i++) {
-            int charByte = charArray[i] & 0xFF;
-            if (isLeadByte(charByte)) {
-                // charByte が２バイト文字の第１バイトの場合
-                if (++i >= charArray.length) {
-                    // 第２バイトが存在しない場合：エラー
-                    return true;
-                }
-            }
-
-            int charByte2 = charArray[i] & 0xFF;
-            if (!isTrailByte(charByte2)) {
-                // 第２バイトが不正：エラー
-                return true;
-            }
-
-            int targetChar = (charByte << 8) | charByte2;
-            if ((0x8740 <= targetChar) && (targetChar <= 0x879E)) {
-                // 13区 (NEC特殊文字)：機種依存 > Windowsでは表示できるMacで文字化け
-                return true;
-            }
-
-            if ((0xED40 <= targetChar) && (targetChar <= 0xEFFC)) {
-                // 89-92区 (NEC選定IBM拡張文字)：機種依存 > 句点コード
-                return true;
-            }
-
-            if ((0xFA40 <= targetChar) && (targetChar <= 0xfC4B)) {
-                // 115-119区 (IBM拡張文字)：機種依存
-                return true;
-            }
-        }
-
-        return false;
-    }
 
     /**
      * 禁則文字チェックします (サロゲートペア文字考慮なし)
@@ -232,7 +122,6 @@ public class ByteSand {
         }
 
         return true;
-
     }
 
     /**
