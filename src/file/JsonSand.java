@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 
 import file.bean.Syain;
 
-public class JsonSandbox {
+public class JsonSand {
 
 	public static void main(String[] args) {
 		// JavaオブジェクトからJSONに変換

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-public class HashSandbox {
+public class HashSand {
 	// MD5hashを生成する件数
     private static final int md5hasGenNum = 100000;
 

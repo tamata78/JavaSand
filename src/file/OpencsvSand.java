@@ -9,7 +9,7 @@ import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVWriter;
 
-public class OpencsvSandbox {
+public class OpencsvSand {
 
 	public static void main(String[] args) throws IOException {
 		String values[] = { "\"", ",", "aaaa", "bbb" };

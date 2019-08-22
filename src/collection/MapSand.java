@@ -3,7 +3,7 @@ package collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapSandbox {
+public class MapSand {
 	public static void main(String[] args) {
 		Map<String, String> testMap = new HashMap<String, String>();
 	    testMap.put("key1", "value1");

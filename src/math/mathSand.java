@@ -2,7 +2,7 @@ package math;
 
 import java.math.BigDecimal;
 
-public class mathSandbox {
+public class mathSand {
 	/** BigDecimal **/
 
 	// intとBigDecimalの相互変換

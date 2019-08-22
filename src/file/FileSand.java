@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 import java.util.Arrays;
 import java.util.List;
 
-public class FileSandbox {
+public class FileSand {
 
 	public static void main(String[] args) {
 		// バッファリングしつつ、ファイル出力

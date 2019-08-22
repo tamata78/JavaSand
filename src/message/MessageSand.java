@@ -1,6 +1,6 @@
 package message;
 
-public class MessageSandbox {
+public class MessageSand {
 
 	public static void main(String[] args) {
 		// レスポンスに設定してメッセージ送付

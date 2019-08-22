@@ -1,6 +1,6 @@
 package batch;
 
-public class BatchSandbox {
+public class BatchSand {
 
 	public static void main(String[] args) {
 		// 終了ステータス

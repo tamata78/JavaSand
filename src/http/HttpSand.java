@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-public class HttpSandbox {
+public class HttpSand {
     public static HttpServletResponse res;
 
     public static void main(String[] args) {

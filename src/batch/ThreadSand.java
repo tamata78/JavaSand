@@ -1,6 +1,6 @@
 package batch;
 
-public class ThreadSandox {
+public class ThreadSand {
 
 	public static void main(String[] args) {
 		// シンプルスレッド処理実行

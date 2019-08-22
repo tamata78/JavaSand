@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.StringJoiner;
 
-public class ListSandox {
+public class ListSand {
 	public static void main(String[] args) {
 		// Listに複数要素を追加しつつ、初期化
 		List<String> list1 = new ArrayList<String>(Arrays.asList("A", "B", "C"));

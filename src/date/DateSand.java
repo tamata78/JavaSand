@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class DateSandox {
+public class DateSand {
 	public static void main(String[] args) {
 		/** LocalDate **/
 		// LocalDate内で変換 LocalDateTime -> LocalDate, LocalTime
