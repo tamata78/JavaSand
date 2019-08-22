@@ -15,7 +15,7 @@ public class CodePointSand {
         }
 
         System.out.println("=== サロゲートペア文字あり。2桁charを考慮 ===");
-        for (int i = 0, j = 0, codePoint; i < testStr.length(); i += Character.charCount(codePoint)) {
+        for (int i = 0, codePoint; i < testStr.length(); i += Character.charCount(codePoint)) {
             codePoint = testStr.codePointAt(i);
             System.out.printf("%s => %#x%n", (char) codePoint, codePoint);
         }

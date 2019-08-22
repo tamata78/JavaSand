@@ -54,7 +54,7 @@ public class ByteSand {
     }
 
     /** 禁則文字. **/
-    private static final String INVALID_CHARACTER = "invalid.character";
+    // private static final String INVALID_CHARACTER = "invalid.character";
 
     /**
      * 禁則文字チェックします (サロゲートペア文字考慮なし)
@@ -131,14 +131,9 @@ public class ByteSand {
      * @return true 禁則文字あり false 禁則文字なし
      */
     public static boolean checkProhibitedSurrogateChar(String str) {
-        // サロゲートペア文字を考慮して文字数カウント
-        int cpCount = str.codePointCount(0, str.length());
-        int[] codePoints = new int[cpCount];
-
         // 1文字ずつチェックしていく
-        for (int i = 0, j = 0, codePoint; i < str.length(); i += Character.charCount(codePoint)) {
+        for (int i = 0, codePoint; i < str.length(); i += Character.charCount(codePoint)) {
             codePoint = str.codePointAt(i);
-            // codePoints[j++] = codePoint;
 
             // 対象文字列
             int[] tmpStrChar = { codePoint };

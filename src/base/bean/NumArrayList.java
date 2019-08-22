@@ -12,5 +12,6 @@ import java.util.ArrayList;
  * @param <T>
  */
 public class NumArrayList<T extends Number> extends ArrayList<T> {
+    private static final long serialVersionUID = 1L;
 
 }
