@@ -1,53 +1,32 @@
 package String;
 
-import java.util.List;
-
-import resource.ResourceUtils;
+import java.util.Arrays;
 
 public class StringUtils {
-    /** 禁則文字. **/
-    private static final String INVALID_CHARACTER = "invalid.character";
-
-
     /**
-     * 禁則文字チェック
-     *
-     * @param targetStr
-     * @return 禁則文字あり：false 禁則文字なし:true
+     * 配列文字列を結合する<br>
+     * StreamAPIなし
+     * 
+     * @param strArray
+     * @return
      */
-    private static boolean checkProhibitedChars(String targetStr) {
-        String prohibitedChars = ResourceUtils.getPropertiesVal(INVALID_CHARACTER);
-        new StringBuilder("[").append(prohibitedChars).append("]+");
-
-        // charAtは、機種依存文字(≒サロゲートペア)を考慮できない
-//        for(int i = 0; i < targetStr.codePointCount(0, targetStr.length()); i++) {
-//            char targetChar = targetStr.charAt(i);
-//
-//            for (int prohibitedIndex = 0; prohibitedIndex < prohibitedChars.length(); prohibitedIndex++) {
-//                if(targetChar.equals(prohibitedChars.charAt(prohibitedIndex))) {
-//
-//                }
-//            }
-//
-//        }
-
-        return true;
-
+    public static String combineStrArray(String[] strArray) {
+        StringBuilder buf = new StringBuilder(strArray.length);
+        for (String str : strArray) {
+            buf.append(str);
+        }
+        return buf.toString();
     }
 
-
     /**
-     * 禁則文字チェック
-     *
-     * @param menuList 商品リスト
-     * @return checkResponse
+     * 配列文字列を結合する<br>
+     * StreamAPIあり
+     * 
+     * @param strArray
+     * @return
      */
-    public String checkProhibitedChar(List<String> menuList) {
-        for (String string : menuList) {
-
-        }
-
-
-        return null;
+    public static String combineStrArrayStream(String[] strArray) {
+        return Arrays.stream(strArray).collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
+                .toString();
     }
 }
