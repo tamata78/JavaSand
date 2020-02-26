@@ -2,7 +2,6 @@ package http;
 
 import java.net.HttpURLConnection;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import org.w3c.dom.Document;
@@ -53,13 +52,6 @@ public class HttpSand {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        // Cookie
-        Cookie cookie = new Cookie("userId", "111");
-        cookie.setPath("http://example.com");
-
-        // レスポンスにcookieを追加
-        res.addCookie(cookie);
 
     }
 }
