@@ -10,6 +10,7 @@ import java.time.Period;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -38,7 +39,7 @@ public class DateUtils {
 
 	/**
 	 * 日付を文字列にする(フォーマット指定)
-	 * 
+	 *
 	 * @param date
 	 * @return
 	 */
@@ -321,5 +322,23 @@ public class DateUtils {
 	public static Timestamp currentDateTimeMillis() {
 		return new Timestamp(System.currentTimeMillis());
 	}
+
+	/**
+	 * 日付フォーマットチェック
+	 *
+	 * @return
+	 */
+	public static boolean checkDateFormatJava8(String dateFormat) {
+		try {
+		    DateTimeFormatter dtf = DateTimeFormatter.ofPattern(dateFormat);
+		    String s1 = "2017/03/1A";
+		    String s2 = dtf.format(LocalDate.parse(s1, dtf));
+		    System.out.println(s2);
+		} catch (DateTimeParseException dtp) {
+		    return false;
+		}
+		return true;
+	}
+
 
 }
