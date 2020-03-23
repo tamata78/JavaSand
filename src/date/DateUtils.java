@@ -328,12 +328,11 @@ public class DateUtils {
 	 *
 	 * @return
 	 */
-	public static boolean checkDateFormatJava8(String dateFormat) {
+	public static boolean checkDateFormatJava8(String targetDate, String dateFormat) {
 		try {
 		    DateTimeFormatter dtf = DateTimeFormatter.ofPattern(dateFormat);
-		    String s1 = "2017/03/1A";
-		    String s2 = dtf.format(LocalDate.parse(s1, dtf));
-		    System.out.println(s2);
+		    String resultStr = dtf.format(LocalDate.parse(targetDate, dtf));
+		    System.out.println(resultStr);
 		} catch (DateTimeParseException dtp) {
 		    return false;
 		}
