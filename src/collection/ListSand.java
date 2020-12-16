@@ -7,6 +7,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.StringJoiner;
 
+/**
+ * List Java7以前
+ * @author L-YN1405-u
+ *
+ */
 public class ListSand {
     public static void main(String[] args) {
         // Listに複数要素を追加しつつ、初期化

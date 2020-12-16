@@ -37,9 +37,27 @@ public class StreamSand {
         Map<String, Integer> personMap = persons.stream()
                 .collect(Collectors.toMap(Person::getName, Person::getAge, (befIndex, aftIndex) -> aftIndex));
 
-        /** List表示 **/
+        // Map内にKeyがなければ、追加
+        Map<String, List<Integer>> personListMap = new HashMap<String, List<Integer>>();
+        persons.stream()
+        .forEach(person -> {
+        	String name = person.getName();
+        	personListMap.computeIfAbsent(name, n -> new ArrayList<>()); // nameがなければListを追加。初期値設定に使える
+        	personListMap.get(name).add(person.getAge());
+        });
+
+        /** List **/
+        // List内オブジェクト要素のリストを作成
         List<String> nameList = persons.stream().map(Person::getName).collect(Collectors.toList());
         nameList.stream().forEach(System.out::println);
+
+        // List内オブジェクトのメソッドでフィルタしつつ、要素表示
+        persons.stream()
+            .filter(Person::isNotChild)
+            .forEach(person -> {
+            	System.out.println(person.getName());
+            });
+
 
         /** CSV作成 */
         String nameCSV = persons.stream().map(p -> String.format("\"%s\"", p.getName()))

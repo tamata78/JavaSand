@@ -46,4 +46,8 @@ public class Person {
 		this.children = children;
 	}
 
+	public boolean isNotChild() {
+		return this.age >= 20;
+	}
+
 }
