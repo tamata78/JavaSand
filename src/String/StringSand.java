@@ -1,5 +1,7 @@
 package String;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -33,6 +35,11 @@ public class StringSand {
         if (prohibitedPattern.matcher(targetStr).find()) {
             System.out.println("match bbb!");
         }
-
+        
+        // カンマ区切り文字列をList変換
+        String commaStr = "apple,orange,melon";
+        System.out.println("commaStr: " + commaStr);
+        List<String> fruits = Arrays.asList(commaStr.split(","));
+        System.out.println(fruits);
     }
 }
