@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="db.fw.mybatis.SqlSandMapper">
+<cache flushInterval="600000"/>
+    <!-- IN句 -->
+    <select id="selsectA" parameterType="java.util.List" resultType="String">
+      SELECT ITEM_NAME
+      FROM TBL
+      WHERE ITEM_CD in  
+        <foreach item="item" open="(" close=")" collection="dataList" separator=",">
+          #{item}
+        </foreach>
+    </select>
+
+    <!-- コレクション内要素をif内で使う -->
+    <select id="selsectB" parameterType="java.util.List" resultType="String">
+      SELECT ITEM_NAME
+      FROM TBL
+      WHERE ITEM_CD = 'abc'
+        <if test="telNoList.size() > 0">
+            <where>
+                <foreach collection="telNoList" item="telNo" index="idx">
+                    <if test="telNoList[idx] == null">
+                        OR tel_no is null
+                    </if>
+                    <if test="telNoList[idx] != null">
+                        OR tel_no like #{telNo}
+                    </if>
+                </foreach>
+            </where>
+        </if>
+    </select>
+
+</mapper>
